@@ -6,7 +6,7 @@
   rust-bin,
   lib,
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   name = "bevy_lint";
   src = srcInput;
   cargoLock.lockFile = "${srcInput}/Cargo.lock";
