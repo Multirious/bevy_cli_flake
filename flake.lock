@@ -1,5 +1,39 @@
 {
   "nodes": {
+    "bevy_cli": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1748003775,
+        "narHash": "sha256-v7BcmrG3/Ep+W5GkyKRD1kJ1nUxpxYlGGW3SNKh0U+8=",
+        "owner": "TheBevyFlock",
+        "repo": "bevy_cli",
+        "rev": "2d12bc0eff065e2064f2f75809e819e25852fcc3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "TheBevyFlock",
+        "ref": "cli-v0.1.0-alpha.1",
+        "repo": "bevy_cli",
+        "type": "github"
+      }
+    },
+    "bevy_cli_linter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754503164,
+        "narHash": "sha256-b+mmFDTDRxPXR3KLTTEF7TdK2kau8+3QfL3XE3TWrCw=",
+        "owner": "TheBevyFlock",
+        "repo": "bevy_cli",
+        "rev": "20d63d667d8c91db7a4144b83d281098ac57d4fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "TheBevyFlock",
+        "ref": "lint-v0.4.0",
+        "repo": "bevy_cli",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -33,24 +67,10 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1744536153,
-        "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "18dd725c29603f582cf1900e0d25f9f1063dbf11",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
+        "bevy_cli": "bevy_cli",
+        "bevy_cli_linter": "bevy_cli_linter",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay"
@@ -58,7 +78,9 @@
     },
     "rust-overlay": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1757385309,
