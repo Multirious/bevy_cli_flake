@@ -1,20 +1,15 @@
 {
+  srcInput,
+
   rustPlatform,
-  fetchFromGitHub,
   makeWrapper,
   rust-bin,
   lib,
 }:
 rustPlatform.buildRustPackage rec {
-  pname = "bevy_lint";
-  version = "lint-v0.4.0";
-  src = fetchFromGitHub {
-    owner = "TheBevyFlock";
-    repo = "bevy_cli";
-    rev = version;
-    sha256 = "sha256-b+mmFDTDRxPXR3KLTTEF7TdK2kau8+3QfL3XE3TWrCw=";
-  };
-  cargoHash = "sha256-ZCd8ysFMzH6/7c/SUZ1CBrya9kvd8+s/VqF+dwYZ/7s=";
+  name = "bevy_lint";
+  src = srcInput;
+  cargoLock.lockFile = "${srcInput}/Cargo.lock";
   cargoFlags = ["bevy_lint"];
   nativeBuildInputs = [
     makeWrapper

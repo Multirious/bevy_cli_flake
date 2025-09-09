@@ -12,7 +12,7 @@
       flake = false;
     };
     bevy_cli_linter = {
-      url = "github:TheBevyFlock/bevy_cli/lint-v0.4.0 ";
+      url = "github:TheBevyFlock/bevy_cli/lint-v0.4.0";
       flake = false;
     };
   };
@@ -41,6 +41,7 @@
           pkgs.callPackage ./bevy_lint.nix {
             inherit rustPlatform;
             rust-bin = nightlyRust;
+            srcInput = inputs.bevy_cli_linter;
           };
         packages.default = pkgs.symlinkJoin {
           name = "bevy_cli_and_linter";
