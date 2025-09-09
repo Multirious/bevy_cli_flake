@@ -3,9 +3,20 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    bevy_cli = {
+      url = "github:TheBevyFlock/bevy_cli/cli-v0.1.0-alpha.1";
+      flake = false;
+    };
+    bevy_cli_linter = {
+      url = "github:TheBevyFlock/bevy_cli/lint-v0.4.0 ";
+      flake = false;
+    };
   };
-  outputs = { self, flake-utils, nixpkgs, rust-overlay, ... }:
+  outputs = { self, flake-utils, nixpkgs, rust-overlay, ... } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [ (import rust-overlay) ];
@@ -14,7 +25,9 @@
         };
       in
       {
-        packages.bevy_cli = pkgs.callPackage ./bevy_cli.nix {};
+        packages.bevy_cli = pkgs.callPackage ./bevy_cli.nix {
+          srcInput = inputs.bevy_cli;
+        };
         packages.bevy_lint =
           let
             nightlyRust = pkgs.rust-bin.nightly."2025-06-26".default.override {

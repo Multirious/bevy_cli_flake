@@ -1,7 +1,8 @@
 {
+  srcInput,
+
   lib,
   rustPlatform,
-  fetchFromGitHub,
 
   pkg-config,
   openssl,
@@ -10,15 +11,9 @@
   llvmPackages,
 }:
 rustPlatform.buildRustPackage rec {
-  pname = "bevy_cli";
-  version = "cli-v0.1.0-alpha.1";
-  src = fetchFromGitHub {
-    owner = "TheBevyFlock";
-    repo = "bevy_cli";
-    rev = version;
-    sha256 = "sha256-v7BcmrG3/Ep+W5GkyKRD1kJ1nUxpxYlGGW3SNKh0U+8=";
-  };
-  cargoHash = "sha256-QrW0daIjuFQ6Khl+3sTKM0FPGz6lMiRXw0RKXGZIHC0=";
+  name = "bevy_cli";
+  src = srcInput;
+  cargoLock.lockFile = "${srcInput}/Cargo.lock";
   nativeBuildInputs = [
     pkg-config
     openssl
