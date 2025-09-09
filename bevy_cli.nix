@@ -25,10 +25,6 @@ rustPlatform.buildRustPackage rec {
   ] ++ lib.optional doCheck llvmPackages.bintools;
   # Disabled since check takes really long.
   doCheck = false;
-  # postFixup = ''
-  #   wrapProgram "$out"/bin/bevy" \
-  #     --set 
-  # '';
   PKG_CONFIG_PATH = "${openssl.dev}/lib/pkgconfig";
   meta = {
     description = "A Bevy CLI tool and linter.";
