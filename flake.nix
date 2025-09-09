@@ -20,14 +20,14 @@
             nightlyRust = pkgs.rust-bin.nightly."2025-06-26".default.override {
               extensions = ["rustc-dev" "llvm-tools-preview"];
             };
-            rustPlatform =
-            pkgs.makeRustPlatform {
+            rustPlatform = pkgs.makeRustPlatform {
               cargo = nightlyRust;
               rustc = nightlyRust;
             };
           in
           pkgs.callPackage ./bevy_lint.nix {
             inherit rustPlatform;
+            rust-bin = nightlyRust;
           };
         packages.default = pkgs.symlinkJoin {
           name = "bevy_cli_and_lint";

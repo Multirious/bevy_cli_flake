@@ -1,7 +1,8 @@
 {
   rustPlatform,
   fetchFromGitHub,
-  makeBinaryWrapper,
+  makeWrapper,
+  rust-bin,
   lib,
 }:
 rustPlatform.buildRustPackage rec {
@@ -15,6 +16,9 @@ rustPlatform.buildRustPackage rec {
   };
   cargoHash = "sha256-ZCd8ysFMzH6/7c/SUZ1CBrya9kvd8+s/VqF+dwYZ/7s=";
   cargoFlags = ["bevy_lint"];
+  nativeBuildInputs = [
+    makeWrapper
+  ];
   preBuild = ''
     # Hook to exit the sub-crate before cargoInstallPostBuildHook
     postBuildExitDirHook () {
@@ -33,9 +37,9 @@ rustPlatform.buildRustPackage rec {
     "cargoInstallPostBuildHook"
   ];
   postFixup = ''
-    wrapProgram
-      --set BEVY_LINT_SYSROOT "${rustPlatform.rust.rustc}"
-      $out/bin/bevy_lint
+    wrapProgram \
+      "$out/bin/bevy_lint" \
+      --set BEVY_LINT_SYSROOT "${rust-bin}"
   '';
   doCheck = false;
   meta = {
