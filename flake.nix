@@ -30,7 +30,7 @@
             rust-bin = nightlyRust;
           };
         packages.default = pkgs.symlinkJoin {
-          name = "bevy_cli_and_lint";
+          name = "bevy_cli_and_linter";
           paths = [
             self.packages."${system}".bevy_cli
             self.packages."${system}".bevy_lint
