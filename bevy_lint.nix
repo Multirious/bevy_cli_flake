@@ -1,6 +1,7 @@
 {
   rustPlatform,
   fetchFromGitHub,
+  makeBinaryWrapper,
   lib,
 }:
 rustPlatform.buildRustPackage rec {
@@ -31,6 +32,11 @@ rustPlatform.buildRustPackage rec {
     # Continue as normal
     "cargoInstallPostBuildHook"
   ];
+  postFixup = ''
+    wrapProgram
+      --set BEVY_LINT_SYSROOT "${rustPlatform.rust.rustc}"
+      $out/bin/bevy_lint
+  '';
   doCheck = false;
   meta = {
     description = "A Bevy linter.";
